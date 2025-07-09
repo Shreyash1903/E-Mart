@@ -1,5 +1,7 @@
 import os
 from dotenv import load_dotenv
+from pathlib import Path
+from datetime import timedelta
 
 load_dotenv()  # Loads the .env file
 
@@ -8,8 +10,6 @@ RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET")
 
 # print("Razorpay Key ID :", RAZORPAY_KEY_ID)   # Add this temporarily to check if env loads
 # print("Razorpay Key Secret :", RAZORPAY_KEY_SECRET)
-
-from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,27 +45,26 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',  # or facebook, github, etc.
-    'allauth.socialaccount.providers.github',  # Optional, if you want to use GitHub
-    'allauth.socialaccount.providers.facebook',  # Optional, if you want to use Facebook
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.facebook',
 
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'rest_framework.authtoken',  
 
-    'django_extensions', # Optional, for development tools like shell_plus
-
+    'django_extensions',
     'django_filters',
 ]
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend', # This is required for allauth to work properly
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 SITE_ID = 11
 
-REST_USE_JWT = True  # if using JWT
+REST_USE_JWT = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
@@ -86,19 +85,11 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-# You're getting the OTP in the terminal instead of the email because your Django project is configured to use the console email backend, which only prints emails to the terminal — this is the default for development.
-
-# This tells Django to "send" emails by printing them to the terminal.
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# DEFAULT_FROM_EMAIL = 'cutieboy.45264@gmail.com'
-
-# Use Gmail to Send OTP Emails
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")  # Your Gmail address
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
@@ -108,8 +99,6 @@ REST_AUTH = {
     'JWT_AUTH_COOKIE': 'access_token',
 }
 
-
-# Redirects (optional but recommended)
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -119,23 +108,22 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',  
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = DEBUG  # Only allow all origins in development
+CORS_ALLOW_ALL_ORIGINS = DEBUG
 
-# Production CORS settings
 if not DEBUG:
     CORS_ALLOWED_ORIGINS = [
-        "https://yourdomain.com",  # Replace with your actual domain
+        "https://yourdomain.com",
         "https://www.yourdomain.com",
     ]
 else:
     CORS_ALLOWED_ORIGINS = [
-        "http://localhost:3000",  # React development server
+        "http://localhost:3000",
         "http://127.0.0.1:3000",
     ]
 
@@ -158,9 +146,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'simpleshop.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -169,9 +154,6 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'api.CustomUser'
-
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -188,9 +170,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -199,18 +178,12 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-STATIC_URL = 'static/'
-
-import os
+# ✅ Static and Media settings updated
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -226,31 +199,9 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',  # React frontend
+    'http://localhost:3000',
 ]
 
-# Database configuration with environment support
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# For production, you might want to use PostgreSQL:
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('DB_NAME'),
-#         'USER': os.getenv('DB_USER'),
-#         'PASSWORD': os.getenv('DB_PASSWORD'),
-#         'HOST': os.getenv('DB_HOST', 'localhost'),
-#         'PORT': os.getenv('DB_PORT', '5432'),
-#     }
-# }
-
-# If using dj-rest-auth JWT
-from datetime import timedelta
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
 }
