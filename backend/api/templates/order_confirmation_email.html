@@ -1,0 +1,20 @@
+Hi {{ user.first_name|default:user.email }},
+
+Thank you for your purchase at Electronics Mart !
+
+Your order (ID : {{ order.id }}) has been placed successfully.
+
+Here are your order details :
+
+{% for item in order.items.all %}
+- {{ item.product.name }} (x{{ item.quantity }}) - ₹{{ item.price }}
+{% endfor %}
+
+Total : ₹ {{ order.total_price }}
+
+We will ship your items soon !
+
+If you have any questions, reply to this email.
+
+Best regards,  
+Electronics Mart Team
