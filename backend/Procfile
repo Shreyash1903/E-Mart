@@ -1,0 +1,1 @@
+web: gunicorn simpleshop.wsgi:application --log-file -

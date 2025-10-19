@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 from dotenv import load_dotenv
 from pathlib import Path
 from datetime import timedelta
@@ -18,12 +19,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY", 'django-insecure-!oowxhyf-rs1)ozmi*djyac=n@u5t&9r!h8ocut&(amih)brr%')
+SECRET_KEY = os.getenv(
+    "SECRET_KEY", 'django-insecure-!oowxhyf-rs1)ozmi*djyac=n@u5t&9r!h8ocut&(amih)brr%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",") if os.getenv("ALLOWED_HOSTS") else []
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(
+    ",") if os.getenv("ALLOWED_HOSTS") else []
 
 # Application definition
 
@@ -40,7 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     # Social Authentication
-    'django.contrib.sites',  
+    'django.contrib.sites',
 
     'allauth',
     'allauth.account',
@@ -51,7 +54,7 @@ INSTALLED_APPS = [
 
     'dj_rest_auth',
     'dj_rest_auth.registration',
-    'rest_framework.authtoken',  
+    'rest_framework.authtoken',
 
     'django_extensions',
     'django_filters',
@@ -104,6 +107,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add WhiteNoise for static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -146,12 +150,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'simpleshop.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Database Configuration
+# Use PostgreSQL on production (Render), SQLite locally
+if os.getenv('DATABASE_URL'):
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.getenv('DATABASE_URL'),
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 AUTH_USER_MODEL = 'api.CustomUser'
 
@@ -178,10 +193,15 @@ USE_I18N = True
 
 USE_TZ = True
 
-# ✅ Static and Media settings updated
+# Static Files Configuration
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = []
 
+# WhiteNoise configuration for serving static files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Media Files Configuration
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -202,6 +222,20 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
 
+CORS_ALLOW_CREDENTIALS = True
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
 }
+
+# Security Settings for Production
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
