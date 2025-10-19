@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+.navbar {
+  background-color: #1f232a;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links li a:hover {
+  text-decoration: underline;
+}
+
+.logout-btn {
+  background-color: #ff4d4f;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover {
+  background-color: #d9363e;
+}
+
+.navbar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.navbar-avatar:hover {
+  background-color: #bdbdbd;
+}
+
+.profile-icon {
+  font-size: 18px;
+  color: #333;
+}
+
+.profile-dropdown {
+  position: relative;
+}
+
+.profile-dropdown-desktop {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-dropdown-mobile {
+  position: relative;
+  display: none;
+  align-items: center;
+  margin-left: auto;
+}
+
+.profile-dropdown-mobile .dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.profile-dropdown-mobile .dropdown-menu button {
+  background: none;
+  border: none;
+  padding: 10px 16px;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.2s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.profile-dropdown-mobile .dropdown-menu button:hover {
+  background-color: #f2f2f2;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 100;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  padding: 10px 16px;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.2s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f2f2f2;
+}
+
+/* --- Search Form Styling --- */
+.search-form {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1.5px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  height: 36px;
+}
+
+.search-form:focus-within {
+  box-shadow: 0 4px 10px white;
+  border-color: white;
+}
+
+.search-input {
+  padding: 6px 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: black;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  width: 160px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  width: 200px;
+}
+
+.search-button {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.search-button:hover {
+  background-color: #333;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  order: -1; /* This ensures it appears first in flex order on mobile */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 12px;
+    height: 55px;
+  }
+
+  .navbar-left {
+    gap: 12px;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .profile-dropdown-desktop {
+    display: none;
+  }
+
+  .profile-dropdown-mobile {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 55px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #1f232a;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+    display: none;
+    max-height: calc(100vh - 55px);
+    overflow-y: auto;
+    z-index: 999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-links li:last-child {
+    border-bottom: none;
+  }
+
+  .nav-links li a {
+    display: block;
+    padding: 5px 0;
+    font-size: 0.95rem;
+  }
+
+  .search-form {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .search-input {
+    width: 100%;
+    flex: 1;
+  }
+
+  .search-input:focus {
+    width: 100%;
+  }
+
+  .search-button {
+    padding: 0 12px;
+  }
+
+  .dropdown-menu {
+    position: relative;
+    top: 0;
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+  }
+
+  .dropdown-menu button {
+    color: white;
+    padding: 8px 0;
+  }
+
+  .dropdown-menu button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .logout-btn {
+    width: 100%;
+    text-align: left;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 8px 10px;
+    height: 50px;
+  }
+
+  .navbar-left {
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  .menu-icon {
+    font-size: 1.3rem;
+  }
+
+  .nav-links {
+    top: 50px;
+    padding: 12px 15px;
+  }
+
+  .search-input {
+    font-size: 13px;
+    padding: 5px 8px;
+  }
+
+  .search-button {
+    font-size: 13px;
+    padding: 0 10px;
+  }
+}
+

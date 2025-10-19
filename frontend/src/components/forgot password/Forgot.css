@@ -1,11 +1,11 @@
 /* === GLOBAL FONT === */
-.reset-page,
-.reset-container {
+.forgot-container,
+.forgot-page {
   font-family: 'Montserrat', sans-serif;
 }
 
 /* === CENTERING PAGE === */
-.reset-page {
+.forgot-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +16,7 @@
 }
 
 /* === FADE ANIMATION === */
-@keyframes resetFadeSlideUp {
+@keyframes forgotFadeSlideUp {
   0% {
     opacity: 0;
     transform: translateY(40px);
@@ -27,7 +27,7 @@
   }
 }
 
-@keyframes resetBounceOnceStayUp {
+@keyframes forgotBounceOnceStayUp {
   0% {
     transform: translateY(0);
   }
@@ -40,7 +40,7 @@
 }
 
 /* === FORM CONTAINER === */
-.reset-container {
+.forgot-container {
   max-width: 390px;
   width: 100%;
   margin: 30px auto;
@@ -49,32 +49,32 @@
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   text-align: center;
-  animation: resetFadeSlideUp 0.5s ease-out;
+  animation: forgotFadeSlideUp 0.5s ease-out;
   margin-top: 1px;
 }
 
 /* === FORM ELEMENTS === */
-.reset-container form {
+.forgot-container form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.reset-input-icon {
+.forgot-input-icon {
   position: relative;
   display: flex;
   align-items: center;
   margin-bottom: 1.2rem;
 }
 
-.reset-input-icon .reset-icon {
+.forgot-input-icon .forgot-icon {
   position: absolute;
   left: 14px;
   font-size: 16px;
   color: #000000;
 }
 
-.reset-input-icon input {
+.forgot-input-icon input {
   width: 100%;
   padding: 14px 16px;
   padding-left: 40px;
@@ -84,24 +84,24 @@
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.reset-input-icon input:hover {
+.forgot-input-icon input:hover {
   border-color: #555555;
   background-color: #f9f9f9;
 }
 
-.reset-input-icon input:focus {
+.forgot-input-icon input:focus {
   outline: none;
   border-color: #333333;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
-.reset-container input::placeholder {
+.forgot-container input::placeholder {
   font-family: 'Montserrat', sans-serif;
   color: #000000;
 }
 
 /* === BUTTON === */
-.reset-button {
+.forgot-button {
   padding: 14px;
   background-color: #000000;
   color: #ffffff;
@@ -113,55 +113,55 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.reset-button:hover {
+.forgot-button:hover {
   background-color: #333333;
-  animation: resetBounceOnceStayUp 0.4s forwards;
+  animation: forgotBounceOnceStayUp 0.4s forwards;
 }
 
 /* === HEADING === */
-.reset-heading {
+.forgot-heading {
   font-size: 32px;
   margin-bottom: 2rem;
   color: black;
   text-align: center;
-  margin-top: -300px;
+  margin-top: -400px;
 }
 
 /* ==================== Responsive Design ==================== */
 
 /* Small Mobile Devices (up to 480px) */
 @media screen and (max-width: 480px) {
-  .reset-page {
+  .forgot-page {
     padding: 10px;
   }
 
-  .reset-container {
+  .forgot-container {
     max-width: 100%;
     padding: 20px;
     margin: 10px;
     border-radius: 12px;
   }
 
-  .reset-heading {
+  .forgot-heading {
     font-size: 24px;
     margin-bottom: 1.5rem;
     margin-top: 0;
   }
 
-  .reset-container form {
+  .forgot-container form {
     gap: 12px;
   }
 
-  .reset-input-icon {
+  .forgot-input-icon {
     margin-bottom: 1rem;
   }
 
-  .reset-input-icon .reset-icon {
+  .forgot-input-icon .forgot-icon {
     font-size: 14px;
     left: 12px;
   }
 
-  .reset-input-icon input {
+  .forgot-input-icon input {
     padding: 12px 14px;
     padding-left: 38px;
     font-size: 14px;
@@ -169,7 +169,7 @@
     min-height: 44px; /* Touch target optimization */
   }
 
-  .reset-button {
+  .forgot-button {
     padding: 12px;
     font-size: 15px;
     border-radius: 8px;
@@ -179,91 +179,72 @@
 
 /* Mobile Devices (481px to 768px) */
 @media screen and (min-width: 481px) and (max-width: 768px) {
-  .reset-container {
+  .forgot-container {
     max-width: 420px;
     padding: 30px;
     margin: 20px auto;
   }
 
-  .reset-heading {
+  .forgot-heading {
     font-size: 28px;
     margin-top: 0;
   }
 
-  .reset-input-icon input {
+  .forgot-input-icon input {
     min-height: 46px;
   }
 
-  .reset-button {
+  .forgot-button {
     min-height: 46px;
   }
 }
 
 /* Tablet Devices (769px to 1024px) */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
-  .reset-container {
+  .forgot-container {
     max-width: 400px;
   }
 
-  .reset-heading {
-    margin-top: -150px;
+  .forgot-heading {
+    margin-top: -200px;
   }
 }
 
 /* Touch Device Optimization */
 @media (hover: none) and (pointer: coarse) {
-  .reset-input-icon input:hover {
+  .forgot-input-icon input:hover {
     border-color: #e2e8f0; /* Remove hover effect on touch */
     background-color: white;
   }
 
-  .reset-button:hover {
+  .forgot-button:hover {
     background-color: #000000;
     animation: none;
   }
 
-  .reset-button:active {
+  .forgot-button:active {
     transform: scale(0.98);
-    background-color: #333333;
   }
 }
 
 /* Very Small Screens */
 @media screen and (max-width: 360px) {
-  .reset-container {
+  .forgot-container {
     padding: 16px;
     margin: 8px;
   }
 
-  .reset-heading {
+  .forgot-heading {
     font-size: 20px;
   }
 
-  .reset-input-icon input {
+  .forgot-input-icon input {
     font-size: 13px;
     padding: 10px 12px;
     padding-left: 36px;
   }
 
-  .reset-button {
+  .forgot-button {
     font-size: 14px;
-  }
-}
-
-/* Landscape Mode for Mobile */
-@media (max-width: 768px) and (orientation: landscape) {
-  .reset-page {
-    min-height: auto;
-    padding: 15px 10px;
-  }
-
-  .reset-heading {
-    font-size: 22px;
-    margin-top: 0;
-    margin-bottom: 1rem;
-  }
-
-  .reset-container {
-    margin: 10px auto;
   }
 }

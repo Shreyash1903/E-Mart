@@ -1,0 +1,260 @@
+/* === OTP Page Styles === */
+.otp-wrapper {
+  min-height: calc(100vh - 60px); /* Adjust if your navbar is 60px tall */
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  align-items: center;
+  justify-content: flex-start; /* Align content to top instead of center */
+  padding: 60px 20px 30px; /* Top padding adjusted for space from navbar */
+  font-family: 'Montserrat', sans-serif;
+}
+
+.otp-main-heading {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1c1c1c;
+  margin-bottom: 25px;
+}
+
+.otp-card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.otp-subtext {
+  font-size: 16px;
+  color: #4a4a4a;
+  margin-bottom: 16px;
+}
+
+.otp-timer {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.resend-text {
+  color: #000;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.resend-text:hover {
+  text-decoration: underline;
+}
+
+/* === Smaller OTP Boxes === */
+.otp-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.otp-inputs input {
+  width: 40px;
+  height: 46px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  transition: 0.3s ease;
+  background-color: #fff;
+  font-family: 'Montserrat', sans-serif; /* Scoped font */
+}
+
+.otp-inputs input:focus {
+  border-color: #999; /* light black */
+  outline: none;
+  background-color: #fff;
+}
+
+.otp-inputs input.filled {
+  border-color: #28a745;
+}
+
+/* === Submit Button for OTP === */
+.submit-btn {
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-family: 'Montserrat', sans-serif; /* Scoped font */
+}
+
+.submit-btn:hover {
+  background-color: #222;
+}
+
+/* ==================== Responsive Design ==================== */
+
+/* Small Mobile Devices (up to 480px) */
+@media (max-width: 480px) {
+  .otp-wrapper {
+    padding: 30px 12px 20px;
+    min-height: calc(100vh - 50px);
+  }
+
+  .otp-main-heading {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .otp-card {
+    padding: 24px 18px;
+    border-radius: 16px;
+    max-width: 100%;
+  }
+
+  .otp-subtext {
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+
+  .otp-timer {
+    font-size: 14px;
+    margin-bottom: 18px;
+  }
+
+  .otp-inputs {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .otp-inputs input {
+    width: 36px;
+    height: 44px;
+    font-size: 18px;
+    border-radius: 6px;
+  }
+
+  .submit-btn {
+    font-size: 15px;
+    padding: 13px;
+    border-radius: 10px;
+    min-height: 46px; /* Touch target optimization */
+  }
+
+  .resend-text {
+    font-size: 14px;
+  }
+}
+
+/* Mobile Devices (481px to 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .otp-wrapper {
+    padding: 45px 16px 25px;
+  }
+
+  .otp-main-heading {
+    font-size: 25px;
+  }
+
+  .otp-card {
+    padding: 32px 24px;
+    max-width: 420px;
+  }
+
+  .otp-inputs {
+    gap: 9px;
+  }
+
+  .otp-inputs input {
+    width: 38px;
+    height: 45px;
+    font-size: 19px;
+  }
+
+  .submit-btn {
+    min-height: 46px;
+  }
+}
+
+/* Tablet Devices (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .otp-card {
+    max-width: 450px;
+  }
+
+  .otp-inputs input {
+    width: 42px;
+    height: 48px;
+  }
+}
+
+/* Touch Device Optimization */
+@media (hover: none) and (pointer: coarse) {
+  .submit-btn:hover {
+    background-color: #000; /* Remove hover effect on touch */
+  }
+
+  .submit-btn:active {
+    transform: scale(0.98);
+    background-color: #222;
+  }
+
+  .resend-text:hover {
+    text-decoration: none;
+  }
+
+  .resend-text:active {
+    color: #333;
+  }
+}
+
+/* Landscape Mode for Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .otp-wrapper {
+    padding: 20px 12px 15px;
+  }
+
+  .otp-main-heading {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .otp-card {
+    padding: 20px;
+  }
+
+  .otp-inputs {
+    margin-bottom: 16px;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 360px) {
+  .otp-main-heading {
+    font-size: 20px;
+  }
+
+  .otp-card {
+    padding: 20px 14px;
+  }
+
+  .otp-inputs input {
+    width: 32px;
+    height: 42px;
+    font-size: 16px;
+  }
+
+  .submit-btn {
+    font-size: 14px;
+    padding: 12px;
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import './Profile.css'; // Assuming same styling
+import './profile/Profile.css'; // Assuming same styling
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState('');
