@@ -1,5 +1,4 @@
 import os
-import dj_database_url
 from dotenv import load_dotenv
 from pathlib import Path
 from datetime import timedelta
@@ -25,8 +24,13 @@ SECRET_KEY = os.getenv(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(
-    ",") if os.getenv("ALLOWED_HOSTS") else []
+# ALLOWED_HOSTS - Add PythonAnywhere domain
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",") if os.getenv("ALLOWED_HOSTS") else [
+    'localhost',
+    '127.0.0.1',
+    # Add your PythonAnywhere domain when deploying:
+    # 'yourusername.pythonanywhere.com',
+]
 
 # Application definition
 
@@ -121,15 +125,28 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = DEBUG
 
 if not DEBUG:
+    # Production CORS settings
+    # Add your frontend domain when deployed
     CORS_ALLOWED_ORIGINS = [
         "https://yourdomain.com",
         "https://www.yourdomain.com",
+        # Add your Vercel frontend URL:
+        # "https://your-frontend.vercel.app",
     ]
 else:
+    # Development CORS settings
     CORS_ALLOWED_ORIGINS = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
     ]
+
+# Additional CORS settings for PythonAnywhere
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    # Add your frontend domain here when deployed
+]
 
 ROOT_URLCONF = 'simpleshop.urls'
 
@@ -151,22 +168,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'simpleshop.wsgi.application'
 
 # Database Configuration
-# Use PostgreSQL on production (Render), SQLite locally
-if os.getenv('DATABASE_URL'):
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=os.getenv('DATABASE_URL'),
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
+# SQLite for both local development and PythonAnywhere
+# On PythonAnywhere, SQLite data PERSISTS (doesn't get deleted on redeployment)
+# Database file location: /home/yourusername/E-Mart/backend/db.sqlite3
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
 
 AUTH_USER_MODEL = 'api.CustomUser'
 
@@ -199,11 +209,17 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = []
 
 # WhiteNoise configuration for serving static files
+# Works well with PythonAnywhere
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media Files Configuration
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# PythonAnywhere specific settings
+# Uncomment and update these when deploying to PythonAnywhere
+# STATIC_ROOT = '/home/yourusername/E-Mart/backend/staticfiles'
+# MEDIA_ROOT = '/home/yourusername/E-Mart/backend/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -217,12 +233,6 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
-
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-]
-
-CORS_ALLOW_CREDENTIALS = True
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
@@ -239,3 +249,12 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+
+# PythonAnywhere Deployment Notes:
+# 1. Set environment variables in WSGI file (not .env)
+# 2. Update ALLOWED_HOSTS with your PythonAnywhere domain
+# 3. Update CORS_ALLOWED_ORIGINS with your frontend domain
+# 4. Run: python manage.py migrate
+# 5. Run: python manage.py collectstatic --noinput
+# 6. Create superuser: python manage.py createsuperuser
+# See PYTHONANYWHERE-DEPLOY.md for complete instructions
